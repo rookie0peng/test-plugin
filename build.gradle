@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.intellij' version '0.6.5'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.21'
+}
+
+group 'com.plugin.peng'
+version '1.0-SNAPSHOT'
+
+repositories { //repositories闭包
+    mavenLocal() //配置先从本地仓库寻找jar包，优先寻找上一个配置，找到不执行下面的配置
+    mavenCentral() //配置从中央仓库寻找
+    maven { url 'https://maven.aliyun.com/repository/public/' }
+    maven { url 'https://maven.aliyun.com/repository/google/'}
+    maven { url 'https://maven.aliyun.com/repository/jcenter/'}
+    google() //第三方仓库
+    jcenter() //代码托管库：设置之后可以在项目中轻松引用jcenter上的开源项目
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+// See https://github.com/JetBrains/gradle-intellij-plugin/
+intellij {
+    version '2020.3.1'
+}
+patchPluginXml {
+    changeNotes """
+      Add change notes here.<br>
+      <em>most HTML tags may be used</em>"""
+}
+test {
+    useJUnitPlatform()
+}
